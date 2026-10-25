@@ -129,7 +129,7 @@ PiPower 5 settings [G]: DIP 0/0 (5 W charge) · SDSIG = PI3V3 · Default ON/OFF 
 - **STEP contents:** one product, "Macintosh BookMac". Named bodies include Lower Body, Mid Body, Screen Bezel, Keyboard Bezel, Power Button, 60 "Key Caps" bodies and the shift/space stabilizer parts; 60 further bodies are unnamed ("Body").
 - **Mini STEP** (`enclosure/bookmac-mini/bookmac-mini.step`, exported 2026-10-25): same structure, plus "DC Jack Holder" and "Battery Tray" bodies; 60 keycap bodies. The Mini is published only in this repository [S].
 - **Mini STLs** (`enclosure/bookmac-mini/`): Battery Tray, DC Jack Holder, Key Caps, Keyboard Bezel, Lower Body, Mid Body, Power Button, Screen Bezel.
-- **Keycap decals:** direct 1:1 exports of each unit's original `Keyboard.ai` (`decals/export_ai_1to1.py`; 792 × 612 pt, no scaling). The Mini sheet is done and verified against the original; the full-size sheet is pending. Both units share one legend layout; the full size adds a light grey alignment indicator because its keycaps are slightly different [S]. See `decals/README.md`.
+- **Keycap decals:** direct 1:1 exports of each unit's original `Keyboard.ai` (`decals/export_ai_1to1.py`; 792 × 612 pt, no scaling). Both sheets are done and verified against their originals. Both units share one legend layout; the full size adds a light grey alignment indicator (a line across each key, 4.0 mm below its top edge) because its keycaps are slightly different [S]. See `decals/README.md`.
 
 ### 1.7b Board layout files
 
