@@ -1,0 +1,16 @@
+# Binary design files: no line-ending conversion, no text diffs
+*.stl   binary
+*.step  -text
+*.hex   -text
+*.pdf   binary
+*.xlsx  binary
+*.rtf   -text
+*.zip   binary
+
+# EAGLE XML: keep exactly as exported
+*.brd   -text linguist-generated
+*.sch   -text linguist-generated
+
+*.md    text eol=lf
+*.py    text eol=lf
+*.svg   text eol=lf

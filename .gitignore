@@ -1,0 +1,29 @@
+# macOS
+.DS_Store
+._*
+
+# EAGLE / Fusion Electronics backups and locks
+*.b#*
+*.s#*
+*.l#*
+*.lck
+
+# QMK build output
+.build/
+*.backup/
+.backup/
+
+# Python
+__pycache__/
+*.pyc
+
+# Never commit these
+*.conf
+*.rom
+*.ROM
+*.hfv
+*.dsk
+*.img
+
+# Editor backups
+*.bak

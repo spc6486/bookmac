@@ -1,0 +1,344 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2865
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Times-Bold;\f1\fmodern\fcharset0 Courier;\f2\froman\fcharset0 Times-Roman;
+}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red109\green109\blue109;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c50196\c50196\c50196;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}}{\leveltext\leveltemplateid101\'01\'00;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid2}
+{\list\listtemplateid3\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}}{\leveltext\leveltemplateid201\'01\'00;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid3}
+{\list\listtemplateid4\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid301\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid4}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}{\listoverride\listid4\listoverridecount0\ls4}}
+\margl1440\margr1440\vieww23080\viewh19020\viewkind0
+\deftab720
+\pard\pardeftab720\sa321\partightenfactor0
+
+\f0\b\fs48 \cf0 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 0) Prereqs (macOS)\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b0\fs26 \cf0 \
+# Toolchain\
+brew install python@3.12 dfu-programmer osx-cross/avr/avr-gcc@9\
+\
+# One-time virtualenv for QMK CLI (keeps Homebrew Python clean)\
+python3.12 -m venv ~/.qmk-venv\
+source ~/.qmk-venv/bin/activate\
+pip install -U pip qmk\
+\pard\pardeftab720\sa321\partightenfactor0
+
+\f0\b\fs48 \cf0 1) Fresh QMK checkout\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b0\fs26 \cf0 \
+# Clone/initialize QMK (to ~/qmk_firmware)\
+qmk setup -y\
+\
+# Quick environment check\
+qmk doctor\
+\pard\pardeftab720\sa321\partightenfactor0
+
+\f0\b\fs48 \cf0 2) Create the keyboard folder\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b0\fs26 \cf0 \
+mkdir -p ~/qmk_firmware/keyboards/apple/bookmac_prototype/\{keymaps/via\}\
+\pard\pardeftab720\sa321\partightenfactor0
+
+\f0\b\fs48 \cf0 3) Files (drop these in the folder)\
+\pard\pardeftab720\sa298\partightenfactor0
+
+\fs36 \cf0 keyboards/apple/bookmac_prototype/keyboard.json\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f2\b0\fs24 \cf0 This defines the MCU, bootloader, matrix pins, and the logical 5\'d714 layout (and includes the 
+\f0\b fixed last two columns
+\f2\b0  so \'93+= / Backspace\'94 and \'93] \} / \\ |\'94 are correct).\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs26 \cf0 \
+\{\
+  "manufacturer": "Apple",\
+  "keyboard_name": "Bookmac Prototype",\
+  "usb": \{\
+    "vid": "0xFEED",\
+    "pid": "0x6060",\
+    "device_version": "1.0.0"\
+  \},\
+  "processor": "atmega32u4",\
+  "bootloader": "atmel-dfu",\
+\
+  "matrix_pins": \{\
+    "rows": ["E6","F5","F0","F1","F4"],\
+    "cols": ["B4","B5","B6","C6","C7","F6","F7","B0","D1","D2","D3","D5","D4","D6"]\
+    /* NOTE: The last two entries are D4, D6 (not D6, D4). This fixes col 13/14 swap. */\
+  \},\
+\
+  "diode_direction": "COL2ROW",\
+\
+  "layouts": \{\
+    "LAYOUT_5x14": \{\
+      "layout": [\
+        \{ "matrix": [0,0],  "x": 0, "y": 0 \}, \{ "matrix": [0,1],  "x": 1, "y": 0 \},\
+        \{ "matrix": [0,2],  "x": 2, "y": 0 \}, \{ "matrix": [0,3],  "x": 3, "y": 0 \},\
+        \{ "matrix": [0,4],  "x": 4, "y": 0 \}, \{ "matrix": [0,5],  "x": 5, "y": 0 \},\
+        \{ "matrix": [0,6],  "x": 6, "y": 0 \}, \{ "matrix": [0,7],  "x": 7, "y": 0 \},\
+        \{ "matrix": [0,8],  "x": 8, "y": 0 \}, \{ "matrix": [0,9],  "x": 9, "y": 0 \},\
+        \{ "matrix": [0,10], "x":10, "y": 0 \}, \{ "matrix": [0,11], "x":11, "y": 0 \},\
+        \{ "matrix": [0,12], "x":12, "y": 0 \}, \{ "matrix": [0,13], "x":13, "y": 0 \},\
+\
+        \{ "matrix": [1,0],  "x": 0, "y": 1 \}, \{ "matrix": [1,1],  "x": 1, "y": 1 \},\
+        \{ "matrix": [1,2],  "x": 2, "y": 1 \}, \{ "matrix": [1,3],  "x": 3, "y": 1 \},\
+        \{ "matrix": [1,4],  "x": 4, "y": 1 \}, \{ "matrix": [1,5],  "x": 5, "y": 1 \},\
+        \{ "matrix": [1,6],  "x": 6, "y": 1 \}, \{ "matrix": [1,7],  "x": 7, "y": 1 \},\
+        \{ "matrix": [1,8],  "x": 8, "y": 1 \}, \{ "matrix": [1,9],  "x": 9, "y": 1 \},\
+        \{ "matrix": [1,10], "x":10, "y": 1 \}, \{ "matrix": [1,11], "x":11, "y": 1 \},\
+        \{ "matrix": [1,12], "x":12, "y": 1 \}, \{ "matrix": [1,13], "x":13, "y": 1 \},\
+\
+        \{ "matrix": [2,0],  "x": 0, "y": 2 \}, \{ "matrix": [2,1],  "x": 1, "y": 2 \},\
+        \{ "matrix": [2,2],  "x": 2, "y": 2 \}, \{ "matrix": [2,3],  "x": 3, "y": 2 \},\
+        \{ "matrix": [2,4],  "x": 4, "y": 2 \}, \{ "matrix": [2,5],  "x": 5, "y": 2 \},\
+        \{ "matrix": [2,6],  "x": 6, "y": 2 \}, \{ "matrix": [2,7],  "x": 7, "y": 2 \},\
+        \{ "matrix": [2,8],  "x": 8, "y": 2 \}, \{ "matrix": [2,9],  "x": 9, "y": 2 \},\
+        \{ "matrix": [2,10], "x":10, "y": 2 \}, \{ "matrix": [2,11], "x":11, "y": 2 \},\
+        \{ "matrix": [2,12], "x":12, "y": 2 \}, \{ "matrix": [2,13], "x":13, "y": 2 \},\
+\
+        \{ "matrix": [3,0],  "x": 0, "y": 3 \}, \{ "matrix": [3,1],  "x": 1, "y": 3 \},\
+        \{ "matrix": [3,2],  "x": 2, "y": 3 \}, \{ "matrix": [3,3],  "x": 3, "y": 3 \},\
+        \{ "matrix": [3,4],  "x": 4, "y": 3 \}, \{ "matrix": [3,5],  "x": 5, "y": 3 \},\
+        \{ "matrix": [3,6],  "x": 6, "y": 3 \}, \{ "matrix": [3,7],  "x": 7, "y": 3 \},\
+        \{ "matrix": [3,8],  "x": 8, "y": 3 \}, \{ "matrix": [3,9],  "x": 9, "y": 3 \},\
+        \{ "matrix": [3,10], "x":10, "y": 3 \}, \{ "matrix": [3,11], "x":11, "y": 3 \},\
+        \{ "matrix": [3,12], "x":12, "y": 3 \}, \{ "matrix": [3,13], "x":13, "y": 3 \},\
+\
+        \{ "matrix": [4,0],  "x": 0, "y": 4 \}, \{ "matrix": [4,1],  "x": 1, "y": 4 \},\
+        \{ "matrix": [4,2],  "x": 2, "y": 4 \}, \{ "matrix": [4,3],  "x": 3, "y": 4 \},\
+        \{ "matrix": [4,4],  "x": 4, "y": 4 \}, \{ "matrix": [4,5],  "x": 5, "y": 4 \},\
+        \{ "matrix": [4,6],  "x": 6, "y": 4 \}, \{ "matrix": [4,7],  "x": 7, "y": 4 \},\
+        \{ "matrix": [4,8],  "x": 8, "y": 4 \}, \{ "matrix": [4,9],  "x": 9, "y": 4 \},\
+        \{ "matrix": [4,10], "x":10, "y": 4 \}, \{ "matrix": [4,11], "x":11, "y": 4 \},\
+        \{ "matrix": [4,12], "x":12, "y": 4 \}, \{ "matrix": [4,13], "x":13, "y": 4 \}\
+      ]\
+    \}\
+  \}\
+\}\
+\pard\pardeftab720\sa298\partightenfactor0
+
+\f0\b\fs36 \cf0 keyboards/apple/bookmac_prototype/rules.mk\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f2\b0\fs24 \cf0 Start without VIA to prove the base keymap. You can re-enable VIA later (see \'a77).\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs26 \cf0 \
+MCU = atmega32u4\
+BOOTLOADER = atmel-dfu\
+LTO_ENABLE = yes\
+VIA_ENABLE = no\
+DYNAMIC_KEYMAP_ENABLE = no\
+CONSOLE_ENABLE = yes\
+BOOTMAGIC_ENABLE = yes\
+\pard\pardeftab720\sa298\partightenfactor0
+
+\f0\b\fs36 \cf0 keyboards/apple/bookmac_prototype/config.h\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b0\fs26 \cf0 \
+#pragma once\
+#define DEBOUNCE 5\
+\
+// Bootmagic Lite "top-left" == row 0, col 0 (Esc)\
+// Hold Esc *while plugging in* to clear EEPROM once.\
+#define BOOTMAGIC_LITE_ROW    0\
+#define BOOTMAGIC_LITE_COLUMN 0\
+\pard\pardeftab720\sa298\partightenfactor0
+
+\f0\b\fs36 \cf0 keyboards/apple/bookmac_prototype/bookmac_prototype.h\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b0\fs26 \cf0 \
+#pragma once\
+\pard\pardeftab720\sa298\partightenfactor0
+
+\f0\b\fs36 \cf0 keyboards/apple/bookmac_prototype/keymaps/via/keymap.c\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sa240\partightenfactor0
+\ls1\ilvl0
+\f2\b0\fs24 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Base layer = standard ANSI 5\'d714\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sa240\partightenfactor0
+\ls1\ilvl0
+\f0\b \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 FN access
+\f2\b0  = 
+\f1\fs26 MO(_FN)
+\f2\fs24  (momentary) on R4C12 (the third-to-last key)\
+\ls1\ilvl0
+\f0\b \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 On FN
+\f2\b0 , the 
+\f0\b left Command position sends Left Control
+\f2\b0  (
+\f1\fs26 KC_LCTL
+\f2\fs24 )\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs26 \cf0 \
+#include QMK_KEYBOARD_H\
+\
+enum \{ _BASE = 0, _FN = 1 \};\
+\
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = \{\
+\
+[_BASE] = LAYOUT_5x14(\
+/*R0*/ KC_GRAVE,  KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_MINS, KC_EQL,  KC_BSPC,\
+/*R1*/ KC_TAB,    KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_LBRC, KC_RBRC, KC_BSLS,\
+/*R2*/ KC_CAPS,   KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, KC_SCLN,KC_QUOT, KC_ENT,  _______,\
+/*R3*/ KC_LSFT,   KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM,KC_DOT, KC_SLSH,KC_RSFT, _______, _______,\
+/*R4*/ KC_LALT,   KC_LGUI, _______, _______, KC_SPC, _______, _______, _______, _______, _______, _______, _______, MO(_FN), KC_RALT\
+),\
+\
+[_FN] = LAYOUT_5x14(\
+/*R0*/ KC_ESC,    KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12, KC_DELETE,\
+/*R1*/ _______,   _______, KC_UP, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,\
+/*R2*/ _______,   KC_LEFT, KC_DOWN, KC_RIGHT, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,\
+/*R3*/ _______,   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,\
+/*R4*/ KC_LALT,   KC_LCTL, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_RALT\
+)\
+\};\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f2\fs24 \cf0 If you ever want 
+\f0\b toggle FN
+\f2\b0 , change 
+\f1\fs26 MO(_FN)
+\f2\fs24  to 
+\f1\fs26 TG(_FN)
+\f2\fs24 ; to return to base, hit it again.\
+\pard\pardeftab720\sa321\partightenfactor0
+
+\f0\b\fs48 \cf0 4) Build\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b0\fs26 \cf0 \
+cd ~/qmk_firmware\
+qmk clean\
+qmk compile -kb apple/bookmac_prototype -km via\
+\pard\pardeftab720\sa321\partightenfactor0
+
+\f0\b\fs48 \cf0 5) Flash (manual DFU path is most reliable on Mac)\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sa240\partightenfactor0
+\ls2\ilvl0
+\fs24 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	1	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Enter DFU
+\f2\b0 : double-tap the reset on your controller.\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sa240\partightenfactor0
+\ls2\ilvl0\cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	2	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Flash:\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs26 \cf0 \
+cd ~/qmk_firmware\
+sudo dfu-programmer atmega32u4 erase --force\
+sudo dfu-programmer atmega32u4 flash .build/apple_bookmac_prototype_via.hex\
+sudo dfu-programmer atmega32u4 reset\
+\pard\pardeftab720\sa321\partightenfactor0
+
+\f0\b\fs48 \cf0 6) One-time EEPROM clear (Bootmagic Lite)\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f2\b0\fs24 \cf0 Do this 
+\f0\b once
+\f2\b0  so runtime matches the new keymap:\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sa240\partightenfactor0
+\ls3\ilvl0\cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	1	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Unplug the keyboard.\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sa240\partightenfactor0
+\ls3\ilvl0
+\f0\b \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	2	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Hold Esc (top-left)
+\f2\b0 .\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sa240\partightenfactor0
+\ls3\ilvl0\cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	3	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Plug in while holding ~2 seconds, then release.\
+\pard\pardeftab720\sa321\partightenfactor0
+
+\f0\b\fs48 \cf0 7) (Optional) Re-enable VIA for live remaps\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f2\b0\fs24 \cf0 If you want VIA after you\'92ve proven the base keymap:\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs26 \cf0 \
+# keyboards/apple/bookmac_prototype/rules.mk\
+VIA_ENABLE = yes\
+DYNAMIC_KEYMAP_ENABLE = yes\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f2\fs24 \cf0 Rebuild & flash (steps \'a74\'965), then in 
+\f0\b VIA \uc0\u8594  Settings \u8594  Restore Defaults
+\f2\b0  once and 
+\f0\b Save
+\f2\b0  your layout.\
+\pard\pardeftab720\sa321\partightenfactor0
+
+\f0\b\fs48 \cf0 8) Verify / useful checks\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b0\fs26 \cf0 \
+# Confirm JSON is valid\
+python3 -m json.tool ~/qmk_firmware/keyboards/apple/bookmac_prototype/keyboard.json >/dev/null && echo "keyboard.json OK"\
+\
+# See what layout macro QMK generated from your JSON\
+grep -n 'define LAYOUT_' .build/obj_apple_bookmac_prototype_via/src/default_keyboard.h | sed -n '1p'\
+\
+# Optional console (requires CONSOLE_ENABLE = yes)\
+qmk console\
+\pard\pardeftab720\sa321\partightenfactor0
+
+\f0\b\fs48 \cf0 9) Backup working state (nice to have)\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b0\fs26 \cf0 \
+cd ~/qmk_firmware/keyboards/apple/bookmac_prototype\
+mkdir -p .backup\
+tar -czf .backup/working-$(date +%Y%m%d-%H%M).tgz .\
+echo "Backup at: $(pwd)/.backup"\
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs24 \cf3 \strokec3 \
+\pard\pardeftab720\sa298\partightenfactor0
+
+\f0\b\fs36 \cf0 \strokec2 Troubleshooting quickies\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sa240\partightenfactor0
+\ls4\ilvl0
+\fs24 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Columns 13/14 swapped
+\f2\b0 : you\'92re already fixed by ordering the last two 
+\f0\b cols
+\f2\b0  as 
+\f1\fs26 ... "D4","D6"
+\f2\fs24 . If it ever regresses, check that array first.\
+\ls4\ilvl0
+\f0\b \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Still seeing old behavior
+\f2\b0 : do the 
+\f0\b Bootmagic Lite
+\f2\b0  EEPROM clear (hold Esc while plugging in) once, then test.\
+\ls4\ilvl0
+\f0\b \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 DFU not found
+\f2\b0 : use the 
+\f0\b manual
+\f2\b0  dfu-programmer flow (erase/flash/reset) after 
+\f0\b double-tapping
+\f2\b0  reset.\
+\ls4\ilvl0
+\f0\b \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 VIA shows weird layout
+\f2\b0 : in VIA, 
+\f0\b Settings \uc0\u8594  Restore Defaults
+\f2\b0 , set your layout, 
+\f0\b Save
+\f2\b0 .\
+\pard\pardeftab720\sa240\partightenfactor0
+\cf0 That\'92s everything needed to reproduce your now-working build, plus the FN layer behavior (and Cmd\uc0\u8594 Ctrl on FN). If you want me to bundle these files into a tarball layout (paths + content prepacked), say the word and I\'92ll format it exactly.\
+}
