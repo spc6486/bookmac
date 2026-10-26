@@ -44,7 +44,7 @@ The Pi-side software lives in separate repositories:
 | Repository | Purpose |
 |---|---|
 | [emulator-manager](https://github.com/spc6486/emulator-manager) | Tray launcher for SheepShaver / Basilisk II; touch shim, display geometry |
-| [battery-monitor](https://github.com/spc6486/battery-monitor) | PiPower 5 (I2C) / MakerFocus V3P (UART) battery monitoring and safe shutdown |
+| [battery-monitor](https://github.com/spc6486/battery-monitor) | PiPower 5 (I2C) battery monitoring and safe shutdown |
 | [emu-serial-bridge](https://github.com/spc6486/emu-serial-bridge) | Serial bridge between the emulated Mac and Pi-side handlers (battery, brightness, volume) |
 | [emu-control-strip](https://github.com/spc6486/emu-control-strip) | Native Mac OS 7.5 Control Strip modules, Brightness control panel, Power Manager extension |
 | [emu-homecontrol](https://github.com/spc6486/emu-homecontrol) | Classic Mac OS Home Assistant client |
@@ -58,10 +58,10 @@ The Pi-side software lives in separate repositories:
 | Area | Parts |
 |---|---|
 | Compute | Raspberry Pi 5 |
-| Display | 9.7" iPad Retina LCD (2048 × 1536). Full-size: VSDISPLAY VS-RTD2556HC-V2 controller. Mini: PCB800869. Both use a TLT-iPAD3 eDP adapter. |
+| Display | 9.7" iPad Retina LCD, LTL097QL01-A01 (2048 × 1536), in both units. Full-size: VSDISPLAY VS-RTD2556HC-V2 controller. Mini: PCB800869. Each controller comes with a TLT-iPAD3 eDP adapter. |
 | Touch | SingWon capacitive overlay, USB |
-| Backlight | Controller's PWM trace lifted and driven from Pi GPIO12 (hardware PWM) |
-| Audio | Display controller's amplifier and speakers; GPIO24 switches speaker / headphones through the jack-detect line |
+| Backlight | Controller's PWM output separated from the backlight DIM line, which is then driven from Pi GPIO12 (hardware PWM). See [display controller modifications](docs/components-and-wiring.md#4-display-controller-modifications). |
+| Audio | Display controller's amplifier and speakers; GPIO24 switches speaker / headphones through the jack-detect line (same section) |
 | Power | SunFounder PiPower 5 UPS, two 3.7 V LiPo packs in 2S, 12 V barrel input. Observed runtime is about 3–6 h. |
 | Keyboard | Custom 58-key PCB, Cherry MX Low Profile switches, Gateron low-profile plate-mount stabilizers, QMK controller |
 | Rear ports | 12 V DC, ADB, headphone, composite (RCA), Mini-DIN 8 |
@@ -72,7 +72,7 @@ A full components list with wiring is in `docs/`.
 
 <table>
 <tr><td width="50%" valign="top"><img src="docs/images/bookmac-photo.jpg" alt="Finished full-size BookMac running Mac OS 7.5.5" width="100%"><br><sub>Finished full-size BookMac</sub></td><td width="50%" valign="top"><img src="docs/images/bookmac-case-painted.jpg" alt="Painted full-size case" width="100%"><br><sub>Painted full-size case</sub></td></tr>
-<tr><td width="50%" valign="top"><img src="docs/images/bookmac-render-internal.jpg" alt="Rendering of the full-size internal layout" width="100%"><br><sub>Rendering of the full-size internal layout</sub></td><td width="50%" valign="top"><img src="docs/images/bookmac-internal-layout-old-wiring.jpg" alt="Full-size base with boards, older wiring" width="100%"><br><sub>Full-size base: board and standoff positions (<b>wiring outdated</b>, see <code>docs/</code>)</sub></td></tr>
+<tr><td width="50%" valign="top"><img src="docs/images/bookmac-render-internal.jpg" alt="Rendering of the full-size internal layout" width="100%"><br><sub>Rendering of the full-size internal layout</sub></td><td width="50%" valign="top"><img src="docs/images/bookmac-internal-layout.jpg" alt="Current full-size internal layout" width="100%"><br><sub>Full-size internal layout, current wiring</sub></td></tr>
 <tr><td width="50%" valign="top"><img src="docs/images/bookmac-screen-back.jpg" alt="Back of the full-size screen assembly" width="100%"><br><sub>Back of the full-size screen assembly: panel, speakers, display wiring</sub></td><td width="50%" valign="top"><img src="docs/images/bookmac-mini-internal.jpg" alt="BookMac Mini internal layout" width="100%"><br><sub>BookMac Mini internal layout</sub></td></tr>
 </table>
 
@@ -106,7 +106,14 @@ General practice and precautions:
 
 ## Building
 
-Fasteners are M3 and M2 pan-head screws into knurled heat-set inserts, plus M2.5 brass standoffs for the PiPower 5. The Pi 5 stacks on top of the PiPower 5. Details are in `docs/`.
+Start with [`docs/components-and-wiring.md`](docs/components-and-wiring.md). In particular:
+
+- **Rear power switch:** fit the momentary ALPS SPPJ223200 in place of the latching SPPJ222200 shown in the schematic. The PiPower 5 needs a momentary button.
+- **Battery packs:** balance the two packs to within 50 mV of each other before wiring them in series.
+- **Display controller:** backlight dimming and speaker/headphone switching need two modifications to the display controller, and both can damage it if done carelessly. Locate and test each point before soldering.
+- **Keyboard ribbon:** pins 1–20 must match end to end, from the keyboard PCB's solder holes to the controller's IDC header. Check with a meter before powering up.
+
+Fasteners are M3 and M2 pan-head screws into knurled heat-set inserts, plus M2.5 brass standoffs for the PiPower 5. The Pi 5 stacks on top of the PiPower 5.
 
 The keyboard firmware is built with QMK; see `firmware/keyboard/README.md`. The ADB converter uses TMK's [`converter/adb_usb`](https://github.com/tmk/tmk_keyboard/tree/master/converter/adb_usb).
 

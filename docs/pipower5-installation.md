@@ -2,45 +2,16 @@
 
 ## Overview
 
-This documents the replacement of the MakerFocus V3P UPS board with the SunFounder PiPower 5 on the BookMac. The PiPower 5 provides true power path management (passthrough charging), I2C battery monitoring, 5V/5A output, and direct 12V input — eliminating the need for an external buck converter.
+The BookMac uses a SunFounder PiPower 5 for its power path and battery. It provides passthrough charging (the Pi runs from the 12 V input while the battery charges separately), I2C battery monitoring, a 5 V / 5 A output and direct 12 V input with no external converter.
 
-### Why the V3P Was Replaced
+### Pi GPIO used
 
-The V3P's charge controller IC (IP5306-family, deliberately defaced by MakerFocus) repeatedly failed when powered by a Dorhea MP1584EN buck converter stepping down from 12V. The IC has a 5.5–6.0V absolute maximum input voltage and is vulnerable to transients during load transitions. The failure occurred at the moment the EXT BTN was pressed, not during sustained operation. USB-C charger-powered V3P units on other BookMacs continue to operate without issue.
-
-### What Changed
-
-| Component | V3P Setup | PiPower 5 Setup |
-|-----------|-----------|-----------------|
-| UPS board | MakerFocus V3P | SunFounder PiPower 5 |
-| Battery config | 1S parallel (3.7V, 16Ah) | 2S series (7.4V, 8Ah) |
-| Total energy | 59.2Wh | 59.2Wh (unchanged) |
-| Power input | 12V → Dorhea buck → 5V → V3P USB-C | 12V → PiPower 5 screw terminal (direct) |
-| External converter | Dorhea MP1584EN (removed) | None needed |
-| Output voltage | 5.0–5.25V boost from 3.7V | 5.2–5.3V buck from 7.4V |
-| Output current | 3A max | 5A max |
-| Power path | Everything through battery | True passthrough + battery backup |
-| Monitoring | UART on GPIO14/15 | I2C on GPIO2/3 (addr 0x5C) |
-| Status GPIO | GPIO18 (STA) | Not needed |
-| Power button | Latching switch via EXT BTN | Momentary switch via button header |
-| Software | battery-monitor v1.x (UART) | battery-monitor v2.0.0 (I2C + UART dual backend) |
-
-### GPIO Changes
-
-Pins freed by removing V3P:
-- Pin 8 / GPIO14 (UART TX) — no longer used
-- Pin 10 / GPIO15 (UART RX) — no longer used
-- Pin 12 / GPIO18 (STA) — no longer used
-
-Pins now used by PiPower 5:
-- Pin 3 / GPIO2 (I2C SDA) — via PiPower I2C header
-- Pin 5 / GPIO3 (I2C SCL) — via PiPower I2C header
-
-Pins unchanged:
-- Pin 4 / 5V power (now from PiPower 5 output)
+- Pin 3 / GPIO2 (I2C SDA), via the PiPower 5 I2C header
+- Pin 5 / GPIO3 (I2C SCL), via the PiPower 5 I2C header
+- Pin 4 / 5 V power, from the PiPower 5 output
 - Pin 6 / GND
-- Pin 18 / GPIO24 (headphone/speaker switching)
-- Pin 32 / GPIO12 (backlight PWM)
+
+Unrelated to the PiPower 5, the BookMac also uses pin 18 / GPIO24 (headphone/speaker switching) and pin 32 / GPIO12 (backlight PWM). See [`rpi5-pinout.md`](rpi5-pinout.md).
 
 ---
 
@@ -54,11 +25,11 @@ Pins unchanged:
 
 ### Mounting
 
-The PiPower 5 mounts underneath the Raspberry Pi 5 in the space previously occupied by the V3P. Secure with standoffs or double-sided mounting tape as appropriate for the enclosure.
+The PiPower 5 mounts underneath the Raspberry Pi 5 on M2.5 standoffs, with the Pi stacked on top (see the fasteners table in [`components-and-wiring.md`](components-and-wiring.md)).
 
 ### Battery Wiring (2S Series)
 
-The two MakerFocus 3.7V packs are wired in series using a JST-to-screw-terminal adapter:
+The two 3.7 V 10,000 mAh single-cell LiPo packs are wired in series using a JST-to-screw-terminal adapter:
 
 ```
 Pack A [+] ──── Screw Terminal [+] (positive)
@@ -71,10 +42,10 @@ Pack B [-] ──── Screw Terminal [-] (negative)
 - The original PH2.0 JST connectors are left on both battery packs
 - A custom series adapter connects the two JST connectors and terminates at the PiPower 5 battery screw terminals
 - Total voltage: 7.4V nominal (8.4V full, 6.0V empty)
-- Total capacity: 8Ah at 7.4V (59.2Wh)
+- Capacity: rated 10 Ah at 7.4 V nominal. The runtime figures in this guide assume about 8 Ah usable (59.2 Wh).
 - Wire gauge: 22AWG silicone, kept as short as practical
 
-**Before connecting:** Verify both packs are within 50mV of each other. Measure each pack individually with a multimeter before wiring in series.
+**Before connecting, balance the packs.** Measure each pack on its own with a multimeter. If they differ by more than 50 mV, charge each one separately with a single-cell (1S) LiPo charger to the same voltage (charging both to full, 4.20 V, is simplest), let them rest, and measure again. Wire them in series only when they are within 50 mV. In a series pack without balance wiring, a starting difference persists: the lower pack reaches its cut-off first and the higher one is pushed toward overcharge.
 
 ### Power Input
 
@@ -251,7 +222,7 @@ UPS type:    pipower5
 I2C bus:     1, addr 0x5C
 ```
 
-The app auto-detects the PiPower 5 at startup by probing I2C address 0x5C and validating register readings (output voltage 3000–6000mV, battery percentage 0–100). Falls back to V3P UART if I2C detection fails.
+The app auto-detects the PiPower 5 at startup by probing I2C address 0x5C and validating register readings (output voltage 3000–6000mV, battery percentage 0–100).
 
 ### Clean Up
 
@@ -282,7 +253,7 @@ rm -rf ~/battery-monitor
 
 - PiPower 5 activates a 60Ω balancing resistor when any cell exceeds 4.2V
 - Note: The battery screw terminals are 2-pin (no mid-point tap). Balance monitoring relies on the XH2.54 3P connector's mid-point pin. If using screw terminals only, balancing may be limited.
-- Each MakerFocus pack has its own DW01-based BMS with overcharge protection at ~4.25V, which acts as an independent hard voltage clamp per cell.
+- Each pack has its own DW01-based BMS with overcharge protection at ~4.25V, which acts as an independent hard voltage clamp per cell.
 
 ### Battery Protection Layers
 
@@ -303,7 +274,7 @@ battery-monitor calculates predictive runtime from real-time output power. The f
 
 - Check individual pack voltages with a multimeter every few months to confirm they remain within 50mV of each other
 - If packs drift significantly, disconnect both, charge individually to 4.2V with a standalone charger, and reconnect
-- Replace packs when runtime degrades noticeably — YTKavq 3.7V 10000mAh 1160100 (Amazon) is a drop-in replacement for MakerFocus 9065115
+- Replace packs when runtime degrades noticeably. Use a matched pair of 3.7 V 10,000 mAh 1160100-size packs with built-in protection and PH2.0 connectors (for example YTKavq, sold on Amazon), and balance them before connecting.
 
 ---
 

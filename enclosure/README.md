@@ -49,6 +49,7 @@ Where a part has a slicer (3MF) project, its full-size STL is the geometry used 
 
 Board and standoff positions are shown in `../docs/images/`:
 
+- `bookmac-internal-layout.jpg`: full-size internal layout with current wiring.
 - `bookmac-internal-layout-old-wiring.jpg`: full-size base with boards and standoffs. The wiring in this photo is **outdated**; use `docs/components-and-wiring.md` for current wiring.
 - `bookmac-screen-back.jpg`: back of the full-size screen assembly.
 - `bookmac-mini-internal.jpg`: BookMac Mini internal layout.
