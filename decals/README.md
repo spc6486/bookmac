@@ -18,14 +18,14 @@ Waterslide decal artwork for the keycaps of both units. Each sheet is a direct 1
 
 ## Differences between the units
 
-Both units use the same keycap legend layout. The full-size BookMac's keycaps are slightly different, so its sheet adds a light grey alignment indicator. The two sheets were compared element by element: the Mini's 120 key-outline paths and 160 legend glyph runs appear in the full-size sheet at identical positions and sizes, and the full-size sheet adds 120 paths that draw the indicators.
+Both units use the same keycap legend layout. The full-size BookMac's keycaps are slightly different, so its sheet adds a light gray alignment indicator. The two sheets were compared element by element: the Mini's 120 key-outline paths and 160 legend glyph runs appear in the full-size sheet at identical positions and sizes, and the full-size sheet adds 120 paths that draw the indicators.
 
 | | BookMac (full size) | BookMac Mini |
 |---|---|---|
 | Keycap legend layout | Same | Same |
-| Alignment indicator | Horizontal line across each key, 11.34 pt (4.0 mm) below the key's top edge, same colour and weight as the outlines | None |
+| Alignment indicator | Horizontal line across each key, 11.34 pt (4.0 mm) below the key's top edge, same color and weight as the outlines | None |
 | Legend typeface | Arial Narrow Italic | Arial Narrow Italic |
-| Legend colour | Warm grey `#746F6D` | Warm grey `#746F6D` |
+| Legend color | Warm gray `#746F6D` | Warm gray `#746F6D` |
 | Key outline guide | `#F2F2F2`, 0.71 pt | `#F2F2F2`, 0.71 pt |
 | Copies per sheet | 2 (identical) | 2 (identical) |
 
@@ -51,6 +51,6 @@ python3 export_ai_1to1.py Keyboard.ai bookmac-mini-keycaps "BookMac Mini keycap 
 
 The `.ai` must have been saved with "Create PDF Compatible File" enabled.
 
-## Licence
+## License
 
 CC BY-NC-SA 4.0 with the at-cost permission, as for the rest of the hardware (see the top-level README). No Apple logos or artwork.

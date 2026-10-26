@@ -89,8 +89,8 @@ These are the materials used on the original enclosures. Treat them as one worki
 - Bondo glazing putty for layer lines and small defects
 - SprayMAX 1K Plastic Adhesion Promoter (article 3680009)
 - SprayMAX 1K white high-build primer (article 3680403), sanded after priming
-- SprayMAX 1K FillClean base coat, custom-mix can (article 3682071), filled to a RAL colour:
-  - **BookMac (full size):** RAL 7044, as a Platinum grey match
+- SprayMAX 1K FillClean base coat, custom-mix can (article 3682071), filled to a RAL color:
+  - **BookMac (full size):** RAL 7044, as a Platinum gray match
   - **BookMac Mini:** RAL 1013, as a Snow White match
 
   RAL 1013 on both units would be the period-correct choice for the 1985 concepts.
@@ -121,15 +121,15 @@ Fasteners are M3 and M2 pan-head screws into knurled heat-set inserts, plus M2.5
 
 The keyboard firmware is built with QMK; see `firmware/keyboard/README.md`. The ADB converter uses TMK's [`converter/adb_usb`](https://github.com/tmk/tmk_keyboard/tree/master/converter/adb_usb).
 
-## Licences
+## Licenses
 
-| Part | Licence |
+| Part | License |
 |---|---|
 | Enclosure (STEP/STL), PCB design files, BOMs, decals, documentation | [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) (`LICENSE`), with the additional permission below |
 | Keyboard firmware (QMK) and ADB firmware (TMK) | GPL-2.0-or-later, as inherited from QMK and TMK (`firmware/LICENSE`) |
 | Pi-side software (linked repositories) | MIT, except emu-control-strip (see that repository) |
 
-The hardware is shared for others to build, modify and enjoy, not for commercial use. ShareAlike means that if you publish a modified version, it must use the same licence, so improvements stay available to everyone. Because of the non-commercial term this is not "open source hardware" in the OSHWA sense.
+The hardware is shared for others to build, modify and enjoy, not for commercial use. ShareAlike means that if you publish a modified version, it must use the same license, so improvements stay available to everyone. Because of the non-commercial term this is not "open source hardware" in the OSHWA sense.
 
 **Additional permission: making parts at cost.** In addition to CC BY-NC-SA 4.0, you may make and supply parts, boards or kits from this repository's hardware files **at cost**. "At cost" means the price covers only materials, fabrication, shipping and payment-processing fees: no profit and no charge for labour. Group buys on these terms are allowed. Selling for profit, charging for labour, or listing on marketplaces such as Etsy or eBay requires written permission from the maintainer (GitHub user spc6486); please open an issue to ask.
 

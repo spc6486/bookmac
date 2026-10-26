@@ -58,6 +58,6 @@ dfu-programmer atmega32u4 reset
 
 A blank ATmega32U4 straight from the reel has no bootloader; program it once over ISP first. Check the fuses (including HWBE) against the QMK ISP flashing guide before doing so.
 
-## Licence
+## License
 
 QMK is licensed under GPL-2.0-or-later; this firmware and keymap inherit it. See `../LICENSE`. The corresponding source is the keyboard folder in this directory together with [QMK Firmware](https://github.com/qmk/qmk_firmware).

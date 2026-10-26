@@ -57,7 +57,7 @@ Applies to both units, the full-size BookMac and the BookMac Mini, unless a row 
 | Pi feed | PiPower 5 HAT header 5 V / GND → Pi pin 4 / pin 6 | [G][S] |
 | Display controller feed | Two power pins (5 V / GND) on the PiPower 5 HAT header → wired female USB-C connector near the PiPower 5 → USB-C cable → display controller | [S] |
 | Power button | Rear board S1 (momentary, §3.4) → PiPower 5 external button header | [R][S] |
-| Pi power button | Rear board S2 (labelled RESET) → Raspberry Pi 5 J2 power-button pads | [S] |
+| Pi power button | Rear board S2 (labeled RESET) → Raspberry Pi 5 J2 power-button pads | [S] |
 
 PiPower 5 settings [G]: DIP 0/0 (5 W charge) · SDSIG = PI3V3 · Default ON/OFF = OFF · I2C power = SHUT · `POWER_OFF_ON_HALT=1`.
 
@@ -92,14 +92,14 @@ Observed runtime on battery: about 3–6 h [S].
 | Ref | Part | Notes |
 |---|---|---|
 | S1 | **ALPS SPPJ223200**, DPDT momentary | The schematic shows SPPJ222200 (latching); fit SPPJ223200 (§3.4) |
-| S2 | E-Switch TL1105RF160Q, SPST-NO tactile | Labelled RESET; wired to the Pi 5 J2 power-button pads (§3.4) |
+| S2 | E-Switch TL1105RF160Q, SPST-NO tactile | Labeled RESET; wired to the Pi 5 J2 power-button pads (§3.4) |
 | POWER, RESET | JST XH 2-pin | |
 
 ### 1.6 Internal keyboard [K] and controller [C]
 
 - **Keyswitches:** Cherry MX Low Profile footprint. As purchased: "CHERRY MX LOW PROFILE RGB … Silver Switch 3 Pin Linear" ([AliExpress item 3256806141913378](https://www.aliexpress.us/item/3256806141913378.html)) [S].
 - **Stabilizers:** Gateron low-profile plate-mounted [S].
-- **Keyboard PCB:** 58 switches, 58 × 1N4148W-7-F diodes, 5 × 14 matrix (14/14/13/12/5 keys per row). JP1 is a row of 20 through-holes at 2.54 mm pitch, with pins 1 and 20 labelled on the silkscreen.
+- **Keyboard PCB:** 58 switches, 58 × 1N4148W-7-F diodes, 5 × 14 matrix (14/14/13/12/5 keys per row). JP1 is a row of 20 through-holes at 2.54 mm pitch, with pins 1 and 20 labeled on the silkscreen.
 - **Controller PCB:** ATmega32U4, same core as §1.4, R2/R7 = 5.1 kΩ. J2 is a TE 5499786-4 2 × 10 latching IDC header.
 - **Ribbon:** a pre-built 20-pin IDC flat ribbon cable, 2.54 mm connector pitch, 300 mm long. The IDC connector at one end plugs into the controller's J2. The other connector is cut off and the conductors are soldered into the keyboard's JP1 holes. Pin order must match end to end (§3.6).
 - **Firmware:** QMK, `firmware/keyboard/` (see its README) [C].
@@ -146,7 +146,7 @@ The keyboard BOM labels the switches "Cherry MX2B-L2NA".
 | J4, J6 | Same Sky SJ1-3533NS 3.5 mm TRS | Headphone pass-through |
 
 Nets, from the `.brd` (there is no schematic):
-- **Composite:** J7 pad 2 (RCA centre) ↔ **J1 pad 2**. Ground pour: J7 sleeve pads ↔ **J1 pad 1**, plus the J3 shell and the J4/J6 shield pads.
+- **Composite:** J7 pad 2 (RCA center) ↔ **J1 pad 2**. Ground pour: J7 sleeve pads ↔ **J1 pad 1**, plus the J3 shell and the J4/J6 shield pads.
 - **J3 ↔ JP1:** pin *n* ↔ pin *n*, for pins 1–8.
 - **J4 ↔ J6:** pin 1↔1, 2↔2, 3↔3. A short 3.5 mm cable runs from the display controller's headphone jack to the inner jack; the outer jack is exposed at the case.
 
@@ -204,11 +204,11 @@ The Mini differs in the display-controller block (PCB800869, with the jack and O
 - **Mini:** the I2C wires (pins 3 and 5) are soldered to the underside of the Pi's header pins, because there is no room above the header. The other header connections use housings as on the full size. Soldering under the header would also work on the full size.
 - **Soldered to pads (both units):** the rear power-button wires go to the Pi 5's J2 pads and the composite video wires to its J7 pads. These are solder pads, not header pins.
 
-Which neighbouring pin a 2-pin housing also covers doesn't matter where that pin is unused.
+Which neighboring pin a 2-pin housing also covers doesn't matter where that pin is unused.
 
 ### 3.2 PiPower 5 ↔ Pi 5 connections
 
-![BookMac Mini with the Pi lifted: PiPower 5 connections labelled](images/bookmac-mini-pipower-wiring.jpg)
+![BookMac Mini with the Pi lifted: PiPower 5 connections labeled](images/bookmac-mini-pipower-wiring.jpg)
 
 *BookMac Mini, with the Pi 5 lying upside down on the keyboard controller so the PiPower 5 underneath is visible. The full size is wired the same way. Labels mark the power to the Pi, the display USB power, the I2C link, the two rear buttons, DC in and the series battery connectors.*
 
@@ -286,8 +286,8 @@ USB-C: VBUS ─ F1 ─ +5V · D−/D+ ─ 22 Ω ─ U1 · CC1/CC2 ─ 5.1 kΩ �
 
 **Pins 1–20 must match end to end.** The mapping is 1:1. Pin *n* at the keyboard's JP1 must reach pin *n* of the controller's J2 IDC header. To get this right:
 - Find conductor 1. On a pre-built IDC ribbon it is usually marked with a red stripe, and it lands on the pin marked with a triangle on the remaining IDC connector. Confirm with a meter rather than trusting the stripe.
-- The keyboard's JP1 has pins 1 and 20 labelled on the silkscreen. Solder conductor 1 into hole 1 and work across in order to conductor 20 in hole 20. Don't twist or flip the ribbon.
-- Before you power it, plug the IDC connector into the controller. Check continuity from each JP1 hole to the matching J2 pin, and check that neighbouring conductors aren't shorted.
+- The keyboard's JP1 has pins 1 and 20 labeled on the silkscreen. Solder conductor 1 into hole 1 and work across in order to conductor 20 in hole 20. Don't twist or flip the ribbon.
+- Before you power it, plug the IDC connector into the controller. Check continuity from each JP1 hole to the matching J2 pin, and check that neighboring conductors aren't shorted.
 - Add strain relief at the soldered end. The prototypes used Kapton tape.
 
 A reversed ribbon puts columns on row pins. The keyboard then produces wrong keys or none, and no single key can tell you why.
@@ -326,7 +326,7 @@ The Pi controls backlight brightness and speaker/headphone switching directly, t
 The goal is for the backlight DIM/PWM input to be driven only by the Pi's GPIO12 (hardware PWM), with the Realtek controller's own PWM output disconnected from it.
 
 **Locate:**
-1. Find the DIM (PWM) input. It is on the TLT-iPAD3 adapter or on the backlight side of the controller, often labelled PWM, ADJ or DIM.
+1. Find the DIM (PWM) input. It is on the TLT-iPAD3 adapter or on the backlight side of the controller, often labeled PWM, ADJ or DIM.
 2. With the board unpowered, use continuity mode to trace it back toward the Realtek controller. Find the trace, series resistor or transistor that connects the controller's PWM output to DIM. That is where it gets separated.
 
 **Test before cutting:**

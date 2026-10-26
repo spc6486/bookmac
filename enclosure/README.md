@@ -1,6 +1,6 @@
 # Enclosure
 
-3D-printable parts for both units, one STL per component, plus the STEP model each set was exported from. All dimensions are in millimetres. Both units were printed in ASA.
+3D-printable parts for both units, one STL per component, plus the STEP model each set was exported from. All dimensions are in millimeters. Both units were printed in ASA.
 
 > **Hobbyist designs, reference only.** Check fit on your own printer before committing to a full print. See the top-level README.
 
