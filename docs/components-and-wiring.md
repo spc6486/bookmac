@@ -201,7 +201,10 @@ The Mini differs in the display-controller block (PCB800869, with the jack and O
 
 **Clearance (both units are wired the same; only the attachment differs) [S]:**
 - **Full size:** every connection uses a housing on top of the header. The header pins used were bent over at an angle so the housings clear the enclosure. Bend each pin once, slowly, near its base; repeated bending fatigues and cracks the pins.
-- **Mini:** the I2C wires (pins 3 and 5) are soldered to the underside of the Pi's header pins, because there is no room above the header. The other connections use housings as on the full size. Soldering under the header would also work on the full size.
+- **Mini:** the I2C wires (pins 3 and 5) are soldered to the underside of the Pi's header pins, because there is no room above the header. The other header connections use housings as on the full size. Soldering under the header would also work on the full size.
+- **Soldered to pads (both units):** the rear power-button wires go to the Pi 5's J2 pads and the composite video wires to its J7 pads. These are solder pads, not header pins.
+
+Which neighbouring pin a 2-pin housing also covers doesn't matter where that pin is unused.
 
 ### 3.2 PiPower 5 ↔ Pi 5 connections
 
