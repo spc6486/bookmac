@@ -34,7 +34,7 @@ Applies to both units, the full-size BookMac and the BookMac Mini, unless a row 
 | LCD | 9.7" iPad Retina panel, 2048 × 1536, **LTL097QL01-A01** | same model | [V][S] |
 | Display controller | **VSDISPLAY VS-RTD2556HC-V2** (Realtek RTD2556). Mini-HDMI and USB-C inputs. The headphone jack and OSD switch are on a separate control/audio board on a cable. | **PCB800869** (Realtek RTD2556 family), 48 × 90 mm. The OSD switch and 3.5 mm jack are on the main board. | [V][S] |
 | eDP adapter | TLT-iPAD3, supplied with the display controller | same | [S] |
-| Controller power | 5 V from the PiPower 5 HAT header through a USB connector (§3.2) | same | [S] |
+| Controller power | 5 V from the PiPower 5 HAT header through a panel-wired female USB-C connector (§3.2) | same | [S] |
 | Video | HDMI from the Pi | same | [S] |
 | Backlight dimming | Controller's PWM output separated from the backlight DIM line; Pi GPIO12 drives DIM through 1 kΩ (§4.1) | same method | [S][P] |
 | Speaker mount | 15 mm position | 15 mm position with a filler insert for a 10 mm speaker | [S] |
@@ -55,7 +55,7 @@ Applies to both units, the full-size BookMac and the BookMac Mini, unless a row 
 | DC in | 5.5 × 2.1 mm barrel, 12 V, ≥ 18 W (36 W recommended) | [G] |
 | DC jack | Tugermoola DC-022D 5.5 × 2.1 mm female, threaded panel mount ([Amazon B0DX1ZQ84K](https://www.amazon.com/dp/B0DX1ZQ84K)), seated flush in a printed holder | [S] |
 | Pi feed | PiPower 5 HAT header 5 V / GND → Pi pin 4 / pin 6 | [G][S] |
-| Display controller feed | Two power pins (5 V / GND) on the PiPower 5 HAT header → a USB connector → display controller | [S] |
+| Display controller feed | Two power pins (5 V / GND) on the PiPower 5 HAT header → wired female USB-C connector near the PiPower 5 → USB-C cable → display controller | [S] |
 | Power button | Rear board S1 (momentary, §3.4) → PiPower 5 external button header | [R][S] |
 | Pi power button | Rear board S2 (labelled RESET) → Raspberry Pi 5 J2 power-button pads | [S] |
 
@@ -197,19 +197,23 @@ The Mini differs in the display-controller block (PCB800869, with the jack and O
 | 32 | GPIO12 | 1 kΩ → backlight DIM |
 | 1 | 3.3 V | **Pending:** → PiPower 5 HAT pin 1 (SDSIG shutdown sense; see [G]) |
 
-**Header connections:** the wires to the Pi's 40-pin header end in four push-on **JST XH 2-pin** housings (2.50 mm pitch, crimped contacts), not individual Dupont jumpers. XH contacts fit the header's 0.64 mm square pins, and the 0.04 mm pitch difference doesn't matter over two positions. Some housings carry only one wire; the 2-pin housing is used anyway because it grips the header more securely than a single jumper. A housing on a bare header is not keyed and can go on reversed or one pin off, so mark pin 1 on each housing and on the header position before unplugging [S]. See the layout photo at the top of this page.
+**Header connections:** on the full-size BookMac, the wires to the Pi's 40-pin header end in four push-on **JST XH 2-pin** housings (2.50 mm pitch, crimped contacts), not individual Dupont jumpers. XH contacts fit the header's 0.64 mm square pins, and the 0.04 mm pitch difference doesn't matter over two positions. Some housings carry only one wire; the 2-pin housing is used anyway because it grips the header more securely than a single jumper. A housing on a bare header is not keyed and can go on reversed or one pin off, so mark pin 1 on each housing and on the header position before unplugging [S]. See the layout photo at the top of this page.
+
+**Clearance (both units are wired the same; only the attachment differs) [S]:**
+- **Full size:** every connection uses a housing on top of the header. The header pins used were bent over at an angle so the housings clear the enclosure. Bend each pin once, slowly, near its base; repeated bending fatigues and cracks the pins.
+- **Mini:** the I2C wires (pins 3 and 5) are soldered to the underside of the Pi's header pins, because there is no room above the header. The other connections use housings as on the full size. Soldering under the header would also work on the full size.
 
 ### 3.2 PiPower 5 ↔ Pi 5 connections
 
 ![BookMac Mini with the Pi lifted: PiPower 5 connections labelled](images/bookmac-mini-pipower-wiring.jpg)
 
-*BookMac Mini, with the Pi 5 lying upside down on the keyboard controller so the PiPower 5 underneath is visible. Labels mark the power to the Pi, the display USB power, the I2C link, the two rear buttons, DC in and the series battery connectors.*
+*BookMac Mini, with the Pi 5 lying upside down on the keyboard controller so the PiPower 5 underneath is visible. The full size is wired the same way. Labels mark the power to the Pi, the display USB power, the I2C link, the two rear buttons, DC in and the series battery connectors.*
 
 | Function | PiPower 5 side | Pi 5 side | Notes |
 |---|---|---|---|
 | Pi power | 5 V / GND pins on the HAT header (female header removed) | Pin 4 (5 V), pin 6 (GND) | 22 AWG silicone [G] |
-| I2C monitoring and control | Dedicated 1×4 I2C header: SDA, SCL | Pin 3 (GPIO2, SDA1), pin 5 (GPIO3, SCL1) | Header 3V3 and GND not used; ground is shared through pin 6. Bus 1, address 0x5C [G] |
-| Display controller power | Two power pins (5 V / GND) on the HAT header | — | Wired to a USB connector that feeds the display controller [S] |
+| I2C monitoring and control | Dedicated 1×4 I2C header: SDA, SCL | Pin 3 (GPIO2, SDA1), pin 5 (GPIO3, SCL1) | Header 3V3 and GND not used; ground is shared through pin 6. Bus 1, address 0x5C [G]. Mini: soldered to the underside of the Pi's header pins (see below) |
+| Display controller power | Two power pins (5 V / GND) on the HAT header | — | Wired to a female USB-C connector mounted near the PiPower 5; a USB-C cable runs from it to the display controller. The connector doubles as a place to disconnect display power [S] |
 | Power button | External button header | — | Rear board S1, momentary [S] |
 | Shutdown sense | HAT header pin 1 (SDSIG = PI3V3) | Pin 1 (3.3 V) | **Not yet wired.** Until it is, the PiPower 5 output stays on after shutdown [G] |
 | DC in | VIN screw terminals | — | 12 V barrel jack |
