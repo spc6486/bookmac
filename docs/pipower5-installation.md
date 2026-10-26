@@ -57,7 +57,8 @@ Pack B [-] ──── Screw Terminal [-] (negative)
 
 ### Power Output to Pi
 
-- 5V and GND wired from PiPower 5 output to Pi GPIO header pin 4 (5V) and pin 6 (GND)
+- 5V and GND wired from the PiPower 5 HAT header power pins to Pi GPIO header pin 4 (5V) and pin 6 (GND)
+- Two further power pins (5V and GND) on the PiPower 5 HAT header feed a USB connector that powers the display controller
 - Wire gauge: 22AWG silicone
 
 ### I2C Connection

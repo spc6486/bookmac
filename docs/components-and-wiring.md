@@ -18,8 +18,8 @@ Applies to both units, the full-size BookMac and the BookMac Mini, unless a row 
 
 ## Before you build
 
-1. **Rear power switch.** The rear power/reset board is drawn with S1 = ALPS SPPJ222200, a *latching* switch. The PiPower 5 needs a *momentary* button. Fit the momentary **ALPS SPPJ223200** instead (§3.3). The prototypes used the latching part with its latching pin removed by hand.
-2. **Balance the battery packs before wiring them in series.** Measure each pack on its own. If the two differ by more than **50 mV**, charge each one separately with a single-cell (1S) LiPo charger to the same voltage, then measure again before connecting them (§3.2).
+1. **Rear power switch.** The rear power/reset board is drawn with S1 = ALPS SPPJ222200, a *latching* switch. The PiPower 5 needs a *momentary* button. Fit the momentary **ALPS SPPJ223200** instead (§3.4). The prototypes used the latching part with its latching pin removed by hand.
+2. **Balance the battery packs before wiring them in series.** Measure each pack on its own. If the two differ by more than **50 mV**, charge each one separately with a single-cell (1S) LiPo charger to the same voltage, then measure again before connecting them (§3.3).
 3. **Display controller modifications.** Backlight dimming and speaker/headphone switching need two changes to the display controller. Both can damage the controller if done carelessly. Read §4 before you start.
 
 ---
@@ -34,7 +34,7 @@ Applies to both units, the full-size BookMac and the BookMac Mini, unless a row 
 | LCD | 9.7" iPad Retina panel, 2048 × 1536, **LTL097QL01-A01** | same model | [V][S] |
 | Display controller | **VSDISPLAY VS-RTD2556HC-V2** (Realtek RTD2556). Mini-HDMI and USB-C inputs. The headphone jack and OSD switch are on a separate control/audio board on a cable. | **PCB800869** (Realtek RTD2556 family), 48 × 90 mm. The OSD switch and 3.5 mm jack are on the main board. | [V][S] |
 | eDP adapter | TLT-iPAD3, supplied with the display controller | same | [S] |
-| Controller power | USB-C from the PiPower 5 | same | [S] |
+| Controller power | 5 V from the PiPower 5 HAT header through a USB connector (§3.2) | same | [S] |
 | Video | HDMI from the Pi | same | [S] |
 | Backlight dimming | Controller's PWM output separated from the backlight DIM line; Pi GPIO12 drives DIM through 1 kΩ (§4.1) | same method | [S][P] |
 | Speaker mount | 15 mm position | 15 mm position with a filler insert for a 10 mm speaker | [S] |
@@ -50,13 +50,14 @@ Applies to both units, the full-size BookMac and the BookMac Mini, unless a row 
 | Function | Part | Notes |
 |---|---|---|
 | UPS / power path | SunFounder PiPower 5 | Female header desoldered; mounted under the Pi on standoffs, with the Pi on top. 5 V / 5 A out [G][S] |
-| Cells | 2 × 3.7 V 10,000 mAh single-cell LiPo packs with built-in protection, PH2.0 connectors | 2S series [G]; observed capacity around 8 Ah [S]; balance first (§3.2) |
+| Cells | 2 × 3.7 V 10,000 mAh single-cell LiPo packs with built-in protection, PH2.0 connectors | 2S series [G]; observed capacity around 8 Ah [S]; balance first (§3.3) |
 | Cell mounting | Full-size: packs VHB-taped together, then to the bottom case. Mini: on a printed tray next to the keyboard controller. | [S] |
 | DC in | 5.5 × 2.1 mm barrel, 12 V, ≥ 18 W (36 W recommended) | [G] |
 | DC jack | Tugermoola DC-022D 5.5 × 2.1 mm female, threaded panel mount ([Amazon B0DX1ZQ84K](https://www.amazon.com/dp/B0DX1ZQ84K)), seated flush in a printed holder | [S] |
-| Pi feed | PiPower 5 5 V → Pi pin 4 / pin 6 | [G] |
-| Display controller feed | PiPower 5 USB-C → display controller USB-C | [S] |
-| Power button | Rear board S1 (momentary, §3.3) → PiPower 5 button header | [R][S] |
+| Pi feed | PiPower 5 HAT header 5 V / GND → Pi pin 4 / pin 6 | [G][S] |
+| Display controller feed | Two power pins (5 V / GND) on the PiPower 5 HAT header → a USB connector → display controller | [S] |
+| Power button | Rear board S1 (momentary, §3.4) → PiPower 5 external button header | [R][S] |
+| Pi power button | Rear board S2 (labelled RESET) → Raspberry Pi 5 J2 power-button pads | [S] |
 
 PiPower 5 settings [G]: DIP 0/0 (5 W charge) · SDSIG = PI3V3 · Default ON/OFF = OFF · I2C power = SHUT · `POWER_OFF_ON_HALT=1`.
 
@@ -90,8 +91,8 @@ Observed runtime on battery: about 3–6 h [S].
 
 | Ref | Part | Notes |
 |---|---|---|
-| S1 | **ALPS SPPJ223200**, DPDT momentary | The schematic shows SPPJ222200 (latching); fit SPPJ223200 (§3.3) |
-| S2 | E-Switch TL1105RF160Q, SPST-NO tactile | Reset |
+| S1 | **ALPS SPPJ223200**, DPDT momentary | The schematic shows SPPJ222200 (latching); fit SPPJ223200 (§3.4) |
+| S2 | E-Switch TL1105RF160Q, SPST-NO tactile | Labelled RESET; wired to the Pi 5 J2 power-button pads (§3.4) |
 | POWER, RESET | JST XH 2-pin | |
 
 ### 1.6 Internal keyboard [K] and controller [C]
@@ -100,7 +101,7 @@ Observed runtime on battery: about 3–6 h [S].
 - **Stabilizers:** Gateron low-profile plate-mounted [S].
 - **Keyboard PCB:** 58 switches, 58 × 1N4148W-7-F diodes, 5 × 14 matrix (14/14/13/12/5 keys per row). JP1 is a row of 20 through-holes at 2.54 mm pitch, with pins 1 and 20 labelled on the silkscreen.
 - **Controller PCB:** ATmega32U4, same core as §1.4, R2/R7 = 5.1 kΩ. J2 is a TE 5499786-4 2 × 10 latching IDC header.
-- **Ribbon:** a pre-built 20-pin IDC flat ribbon cable, 2.54 mm connector pitch, 300 mm long. The IDC connector at one end plugs into the controller's J2. The other connector is cut off and the conductors are soldered into the keyboard's JP1 holes. Pin order must match end to end (§3.5).
+- **Ribbon:** a pre-built 20-pin IDC flat ribbon cable, 2.54 mm connector pitch, 300 mm long. The IDC connector at one end plugs into the controller's J2. The other connector is cut off and the conductors are soldered into the keyboard's JP1 holes. Pin order must match end to end (§3.6).
 - **Firmware:** QMK, `firmware/keyboard/` (see its README) [C].
 
 ### 1.7 Fasteners and mounting [S]
@@ -160,7 +161,7 @@ Nets, from the `.brd` (there is no schematic):
    |              SunFounder PiPower 5                |
    |  BAT +/- <-- 2S pack       button hdr <-- S1     |
    |  I2C hdr (SDA,SCL)         HAT pin1 <-- NOT WIRED|
-   |  5 V out ----------+       USB-C out ---------+  |
+   |  HAT 5V/GND -------+       HAT 5V/GND -> USB --+ |
    +--------|-|---------|--------------------------|--+
            SDA SCL     5V/GND                      |
    +--------v-v---------v-------------+            |
@@ -174,6 +175,7 @@ Nets, from the `.brd` (there is no schematic):
    |  USB --- rear ADB converter (TMK)|
    |  USB --- internal kbd controller |
    |  J7  --- composite (rear RCA)    |
+   |  J2 pads <-- S2 (rear, "RESET") |
    +----------------------------------+
 ```
 
@@ -197,12 +199,31 @@ The Mini differs in the display-controller block (PCB800869, with the jack and O
 
 **Header connections:** the wires to the Pi's 40-pin header end in four push-on **JST XH 2-pin** housings (2.50 mm pitch, crimped contacts), not individual Dupont jumpers. XH contacts fit the header's 0.64 mm square pins, and the 0.04 mm pitch difference doesn't matter over two positions. Some housings carry only one wire; the 2-pin housing is used anyway because it grips the header more securely than a single jumper. A housing on a bare header is not keyed and can go on reversed or one pin off, so mark pin 1 on each housing and on the header position before unplugging [S]. See the layout photo at the top of this page.
 
-### 3.2 Battery (2S) [G]
+### 3.2 PiPower 5 ↔ Pi 5 connections
+
+![BookMac Mini with the Pi lifted: PiPower 5 connections labelled](images/bookmac-mini-pipower-wiring.jpg)
+
+*BookMac Mini, with the Pi 5 lying upside down on the keyboard controller so the PiPower 5 underneath is visible. Labels mark the power to the Pi, the display USB power, the I2C link, the two rear buttons, DC in and the series battery connectors.*
+
+| Function | PiPower 5 side | Pi 5 side | Notes |
+|---|---|---|---|
+| Pi power | 5 V / GND pins on the HAT header (female header removed) | Pin 4 (5 V), pin 6 (GND) | 22 AWG silicone [G] |
+| I2C monitoring and control | Dedicated 1×4 I2C header: SDA, SCL | Pin 3 (GPIO2, SDA1), pin 5 (GPIO3, SCL1) | Header 3V3 and GND not used; ground is shared through pin 6. Bus 1, address 0x5C [G] |
+| Display controller power | Two power pins (5 V / GND) on the HAT header | — | Wired to a USB connector that feeds the display controller [S] |
+| Power button | External button header | — | Rear board S1, momentary [S] |
+| Shutdown sense | HAT header pin 1 (SDSIG = PI3V3) | Pin 1 (3.3 V) | **Not yet wired.** Until it is, the PiPower 5 output stays on after shutdown [G] |
+| DC in | VIN screw terminals | — | 12 V barrel jack |
+| Battery | BAT screw terminals | — | 2S series adapter with JST PH 2.0 connectors to the packs (§3.3) |
+
+The Pi end of each link uses the push-on JST XH 2-pin housings described in §3.1. The two connections the Pi drives itself, GPIO12 for the backlight and GPIO24 for headphone detect, are in §4.
+
+### 3.3 Battery (2S) [G]
 
 ```
 Pack A + ────────────────────── PiPower 5 BAT +
 Pack A − ──┐
            ├─ series junction (no mid-tap to the board)
+           │  (packs keep their JST PH 2.0 connectors; the adapter mates with them)
 Pack B + ──┘
 Pack B − ────────────────────── PiPower 5 BAT −
 ```
@@ -214,7 +235,7 @@ Pack B − ────────────────────── Pi
 3. Let them rest, measure again, and connect them in series only when they are within 50 mV.
 4. Check the pack voltages every few months. Rebalance if they drift apart [G].
 
-### 3.3 Rear power/reset board [R]
+### 3.4 Rear power/reset board [R]
 
 ```
 POWER-2 ── S1-4        RESET-2 ── S2-1
@@ -222,13 +243,16 @@ POWER-1 ── S1-5        RESET-1 ── S2-2
 S1-3 stub, S1-1/2/6 unconnected, S1 shield to GND symbol
 ```
 
+- **POWER** (S1) → PiPower 5 external button header: press to power on; hold for shutdown [G].
+- **RESET** (S2) → Raspberry Pi 5 **J2** power-button pads [S]. Despite the label, this is the Pi's power button, not a hard reset: a press wakes the Pi or requests a clean shutdown.
+
 **Momentary switch: ALPS SPPJ223200.** This is the momentary member of the same SPPJ2 series as the SPPJ222200 in the schematic [ALPS]. ALPS lists the same 2 poles, the same 2.5 mm travel (3.5 mm total) and 3 ± 1.5 N operating force, the same 12.0 × 7.2 × 9.6 mm body and PC-board terminals, and the same 0.2 A / 30 VDC rating. The only listed difference is momentary versus latching operation. ALPS publishes the terminal layout only as images. Before soldering, check with a meter:
 - pins 4–5 are open at rest and closed when pressed (the pair POWER uses);
 - the pin and peg pattern fits the existing holes.
 
 SPPJ3 parts are latching and are not an alternative.
 
-### 3.4 Rear ADB port [A]
+### 3.5 Rear ADB port [A]
 
 ```
 Mini-DIN 4 (J2)        ATmega32U4
@@ -241,7 +265,7 @@ Mini-DIN 4 (J2)        ATmega32U4
 USB-C: VBUS ─ F1 ─ +5V · D−/D+ ─ 22 Ω ─ U1 · CC1/CC2 ─ 5.1 kΩ ─ GND · D1 ESD on D±
 ```
 
-### 3.5 Internal keyboard ↔ controller [K][C]
+### 3.6 Internal keyboard ↔ controller [K][C]
 
 | Pin (both ends) | Keyboard net | Controller net | ATmega32U4 pin |
 |:-:|---|---|---|
