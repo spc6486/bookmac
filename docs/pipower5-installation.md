@@ -42,7 +42,7 @@ Pack B [-] ──── Screw Terminal [-] (negative)
 - The original PH2.0 JST connectors are left on both battery packs
 - A custom series adapter connects the two JST connectors and terminates at the PiPower 5 battery screw terminals
 - Total voltage: 7.4V nominal (8.4V full, 6.0V empty)
-- Capacity: rated 10 Ah at 7.4 V nominal. The runtime figures in this guide assume about 8 Ah usable (59.2 Wh).
+- Capacity: rated 10 Ah at 7.4 V nominal; observed capacity is around 8 Ah (about 59 Wh).
 - Wire gauge: 22AWG silicone, kept as short as practical
 
 **Before connecting, balance the packs.** Measure each pack on its own with a multimeter. If they differ by more than 50 mV, charge each one separately with a single-cell (1S) LiPo charger to the same voltage (charging both to full, 4.20 V, is simplest), let them rest, and measure again. Wire them in series only when they are within 50 mV. In a series pack without balance wiring, a starting difference persists: the lower pack reaches its cut-off first and the higher one is pushed toward overcharge.

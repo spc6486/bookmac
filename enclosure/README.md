@@ -1,6 +1,6 @@
 # Enclosure
 
-3D-printable parts for both units, one STL per component, plus the STEP model each set was exported from. All dimensions are in millimetres.
+3D-printable parts for both units, one STL per component, plus the STEP model each set was exported from. All dimensions are in millimetres. Both units were printed in ASA.
 
 > **Hobbyist designs, reference only.** Check fit on your own printer before committing to a full print. See the top-level README.
 
@@ -15,7 +15,7 @@
 | `key-caps.stl` | Keycaps, all 60 | 98.5 × 270.0 × 5.0 | Printed separately from the stems |
 | `key-cap-stems.stl` | Keycap stems, all 60 | 85.0 × 263.7 × 10.3 | |
 | `power-button.stl` | Power button cap | 11.5 × 11.7 × 11.7 | |
-| `floppy-slot-cover.stl` | Floppy slot cover | 91.6 × 4.5 × 14.4 | |
+| `floppy-slot-cover.stl` | Floppy slot cover | 91.6 × 4.5 × 14.4 | Closes the concept's floppy slot; the space behind it holds the batteries, rear ports and speakers. The Mini has no floppy slot. |
 | `bookmac.step` | Full assembly (STEP) | | Exported from Autodesk Fusion, 2026-10-25 |
 
 The full-size BookMac mounts its battery packs with VHB tape and has no battery tray.

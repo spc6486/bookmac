@@ -6,6 +6,8 @@ Functional replicas of the BookMac and BookMac Mini, the 1985 tablet concepts Ha
 
 There are two units, one per concept: the full-size **BookMac** and the smaller **BookMac Mini**. They share most of the hardware and all of the software; the differences are listed in `docs/` and `decals/README.md`.
 
+The full-size concept has a floppy drive slot. This build closes it with a printed cover (`enclosure/bookmac/floppy-slot-cover.stl`), because the space behind it holds the batteries, rear ports and speakers. The Mini concept shows no floppy provision.
+
 Both concepts are documented in Paul Kunkel, *AppleDesign* (Graphis, 1997), and Hartmut Esslinger, *Keep It Simple* (Arnoldsche, 2013). The build was inspired by Kevin Noki's functional replicas.
 
 > **Work in progress.** This repository documents a personal build as it evolves. Expect inaccuracies, undocumented changes, and parts of the documentation that lag behind the hardware. Verify dimensions, pinouts and part numbers against your own parts before building, and please open an issue when you find an error.
@@ -74,18 +76,20 @@ A full components list with wiring is in `docs/`.
 <tr><td width="50%" valign="top"><img src="docs/images/bookmac-photo.jpg" alt="Finished full-size BookMac running Mac OS 7.5.5" width="100%"><br><sub>Finished full-size BookMac</sub></td><td width="50%" valign="top"><img src="docs/images/bookmac-case-painted.jpg" alt="Painted full-size case" width="100%"><br><sub>Painted full-size case</sub></td></tr>
 <tr><td width="50%" valign="top"><img src="docs/images/bookmac-render-internal.jpg" alt="Rendering of the full-size internal layout" width="100%"><br><sub>Rendering of the full-size internal layout</sub></td><td width="50%" valign="top"><img src="docs/images/bookmac-internal-layout.jpg" alt="Current full-size internal layout" width="100%"><br><sub>Full-size internal layout, current wiring</sub></td></tr>
 <tr><td width="50%" valign="top"><img src="docs/images/bookmac-screen-back.jpg" alt="Back of the full-size screen assembly" width="100%"><br><sub>Back of the full-size screen assembly: panel, speakers, display wiring</sub></td><td width="50%" valign="top"><img src="docs/images/bookmac-mini-internal.jpg" alt="BookMac Mini internal layout" width="100%"><br><sub>BookMac Mini internal layout</sub></td></tr>
+<tr><td width="50%" valign="top"><img src="docs/images/bookmac-mini-render.jpg" alt="Rendering of the BookMac Mini" width="100%"><br><sub>Rendering of the BookMac Mini</sub></td><td width="50%" valign="top"><img src="docs/images/bookmac-mini-render-internal.jpg" alt="Rendering of the BookMac Mini internal layout" width="100%"><br><sub>Rendering of the BookMac Mini internal layout</sub></td></tr>
 </table>
 
 The photos show the finished replica, including the Apple-style markings that are part of the concept's appearance. They are for reference; the repository does not distribute logo artwork.
 
 ## Finishing
 
-These are the materials used on the original enclosure. Treat them as one working example, not a requirement:
+These are the materials used on the original enclosures. Treat them as one working example, not a requirement:
 
+- Both units printed in ASA
 - Bondo glazing putty for layer lines and small defects
 - SprayMAX 1K Plastic Adhesion Promoter (article 3680009)
 - SprayMAX 1K white high-build primer (article 3680403), sanded after priming
-- SprayMAX 1K FillClean base coat, custom mix (61993), filled to a RAL colour:
+- SprayMAX 1K FillClean base coat, custom-mix can (article 3682071), filled to a RAL colour:
   - **BookMac (full size):** RAL 7044, as a Platinum grey match
   - **BookMac Mini:** RAL 1013, as a Snow White match
 

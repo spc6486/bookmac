@@ -50,7 +50,7 @@ Applies to both units, the full-size BookMac and the BookMac Mini, unless a row 
 | Function | Part | Notes |
 |---|---|---|
 | UPS / power path | SunFounder PiPower 5 | Female header desoldered; mounted under the Pi on standoffs, with the Pi on top. 5 V / 5 A out [G][S] |
-| Cells | 2 × 3.7 V 10,000 mAh single-cell LiPo packs with built-in protection, PH2.0 connectors | 2S series [G]; balance first (§3.2) |
+| Cells | 2 × 3.7 V 10,000 mAh single-cell LiPo packs with built-in protection, PH2.0 connectors | 2S series [G]; observed capacity around 8 Ah [S]; balance first (§3.2) |
 | Cell mounting | Full-size: packs VHB-taped together, then to the bottom case. Mini: on a printed tray next to the keyboard controller. | [S] |
 | DC in | 5.5 × 2.1 mm barrel, 12 V, ≥ 18 W (36 W recommended) | [G] |
 | DC jack | Tugermoola DC-022D 5.5 × 2.1 mm female, threaded panel mount ([Amazon B0DX1ZQ84K](https://www.amazon.com/dp/B0DX1ZQ84K)), seated flush in a printed holder | [S] |
