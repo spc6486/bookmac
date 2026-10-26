@@ -121,11 +121,12 @@ PiPower 5 settings [G]: DIP 0/0 (5 W charge) · SDSIG = PI3V3 · Default ON/OFF 
 | Keyboard PCB | M3 × 4 mm | M3 × 3 mm | Tips filed down about 1 mm so they don't dimple the bottom case |
 | Power-switch PCB, ADB PCB, AV board | M3 × 4 mm | M3 × 3 mm | — |
 | Display controller PCB, keyboard controller PCB | M2 × 4 mm | M2 × 3 mm | — |
+| Screen (display) mounting | M2 (length not recorded) | M2 × 3 mm | Same M2 inserts as the controller PCBs |
 | PiPower 5 | M2.5 hex brass standoffs (11 mm body + 6 mm male thread) | M2.5 × 3 mm | 2 mm of thread filed off so it doesn't penetrate the bottom case; Pi 5 stacks on the PiPower 5 |
 
 ### 1.7a Enclosure CAD
 
-- **Published files:** STEP model (`enclosure/bookmac/bookmac.step`, exported 2026-10-25 from Autodesk Fusion). STLs are on [Thingiverse thing 7426168](https://www.thingiverse.com/thing:7426168) under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) [S].
+- **Published files:** STEP model (`enclosure/bookmac/bookmac.step`, exported 2026-10-25 from Autodesk Fusion). STLs in `enclosure/bookmac/` (see `enclosure/README.md`); also on [Thingiverse thing 7426168](https://www.thingiverse.com/thing:7426168) under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) [S]; this repository uses CC BY-NC-SA 4.0.
 - **STEP contents:** one product, "Macintosh BookMac". Named bodies include Lower Body, Mid Body, Screen Bezel, Keyboard Bezel, Power Button, 60 "Key Caps" bodies and the shift/space stabilizer parts; 60 further bodies are unnamed ("Body").
 - **Mini STEP** (`enclosure/bookmac-mini/bookmac-mini.step`, exported 2026-10-25): same structure, plus "DC Jack Holder" and "Battery Tray" bodies; 60 keycap bodies. The Mini is published only in this repository [S].
 - **Mini STLs** (`enclosure/bookmac-mini/`): Battery Tray, DC Jack Holder, Key Caps, Keyboard Bezel, Lower Body, Mid Body, Power Button, Screen Bezel.

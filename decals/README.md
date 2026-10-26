@@ -53,4 +53,4 @@ The `.ai` must have been saved with "Create PDF Compatible File" enabled.
 
 ## Licence
 
-CC BY-NC 4.0, as for the rest of the hardware. No Apple logos or artwork.
+CC BY-NC-SA 4.0 with the at-cost permission, as for the rest of the hardware (see the top-level README). No Apple logos or artwork.

@@ -1,5 +1,7 @@
 # BookMac Replicas
 
+![Rendering of the full-size BookMac replica](docs/images/bookmac-render.jpg)
+
 Functional replicas of the BookMac and BookMac Mini, the 1985 tablet concepts Hartmut Esslinger (frog design) created for Apple. Esslinger's own *Keep It Simple* calls them the MacBook and MacBook Mini. Each unit is built around a Raspberry Pi 5 with a 9.7" 2048×1536 touchscreen, an internal mechanical keyboard, a battery-backed power system and period-style rear ports. Their main use is classic Mac OS (7.5.5) under SheepShaver, but they are general-purpose Pi 5 computers and run other operating systems and emulators, including Basilisk II.
 
 There are two units, one per concept: the full-size **BookMac** and the smaller **BookMac Mini**. They share most of the hardware and all of the software; the differences are listed in `docs/` and `decals/README.md`.
@@ -25,10 +27,11 @@ Both concepts are documented in Paul Kunkel, *AppleDesign* (Graphis, 1997), and 
 | `pcb/rear-port-av/` | Composite RCA, 3.5 mm headphone pass-through, Mini-DIN 8: `.brd`, BOM, CPL |
 | `firmware/keyboard/` | QMK keyboard definition, keymap and pre-built image for the internal keyboard |
 | `firmware/adb/` | Pre-built TMK `adb_usb` unimap image for the ADB converter, with a link to the source |
-| `enclosure/bookmac/` | Full-size STEP model (STLs are on Thingiverse) |
-| `enclosure/bookmac-mini/` | Mini STEP model and STLs |
+| `enclosure/bookmac/` | Full-size STEP model and STLs, one file per part |
+| `enclosure/bookmac-mini/` | Mini STEP model and STLs, one file per part |
+| `enclosure/jigs/` | Keycap holder and keycap decal holder |
 | `decals/` | Keycap legend decals for both units, 1:1 exports of the original artwork (SVG with outlined text, and PDF), and a README listing the differences |
-| `docs/` | Components list and wiring, Pi 5 pinout, PiPower 5 installation |
+| `docs/` | Components list and wiring, Pi 5 pinout, PiPower 5 installation, reference photos (`docs/images/`) |
 
 Board files are EAGLE 9.7 format, exported from Autodesk Fusion Electronics.
 
@@ -65,15 +68,29 @@ The Pi-side software lives in separate repositories:
 
 A full components list with wiring is in `docs/`.
 
+## Photos and reference images
+
+<table>
+<tr><td width="50%" valign="top"><img src="docs/images/bookmac-photo.jpg" alt="Finished full-size BookMac running Mac OS 7.5.5" width="100%"><br><sub>Finished full-size BookMac</sub></td><td width="50%" valign="top"><img src="docs/images/bookmac-case-painted.jpg" alt="Painted full-size case" width="100%"><br><sub>Painted full-size case</sub></td></tr>
+<tr><td width="50%" valign="top"><img src="docs/images/bookmac-render-internal.jpg" alt="Rendering of the full-size internal layout" width="100%"><br><sub>Rendering of the full-size internal layout</sub></td><td width="50%" valign="top"><img src="docs/images/bookmac-internal-layout-old-wiring.jpg" alt="Full-size base with boards, older wiring" width="100%"><br><sub>Full-size base: board and standoff positions (<b>wiring outdated</b>, see <code>docs/</code>)</sub></td></tr>
+<tr><td width="50%" valign="top"><img src="docs/images/bookmac-screen-back.jpg" alt="Back of the full-size screen assembly" width="100%"><br><sub>Back of the full-size screen assembly: panel, speakers, display wiring</sub></td><td width="50%" valign="top"><img src="docs/images/bookmac-mini-internal.jpg" alt="BookMac Mini internal layout" width="100%"><br><sub>BookMac Mini internal layout</sub></td></tr>
+</table>
+
+The photos show the finished replica, including the Apple-style markings that are part of the concept's appearance. They are for reference; the repository does not distribute logo artwork.
+
 ## Finishing
 
 These are the materials used on the original enclosure. Treat them as one working example, not a requirement:
 
 - Bondo glazing putty for layer lines and small defects
-- SprayMAX 1K Plastic Adhesion Promoter
-- SprayMAX 1K white high-build primer, sanded after priming
-- SprayMAX 1K FillClean base coat, filled to RAL 7044-GL
-- SprayMAX 2K clear coat
+- SprayMAX 1K Plastic Adhesion Promoter (article 3680009)
+- SprayMAX 1K white high-build primer (article 3680403), sanded after priming
+- SprayMAX 1K FillClean base coat, custom mix (61993), filled to a RAL colour:
+  - **BookMac (full size):** RAL 7044, as a Platinum grey match
+  - **BookMac Mini:** RAL 1013, as a Snow White match
+
+  RAL 1013 on both units would be the period-correct choice for the 1985 concepts.
+- SprayMAX 2K clear coat, satin (article 3680067)
 - Experts Choice decals, item 123 (artwork in `decals/`)
 - Microscale MicroSet and MicroSol to help the decals conform to the concave keycaps
 
@@ -84,6 +101,7 @@ General practice and precautions:
 - **Work in thin coats.** Fill layer lines with thin passes of putty, then use high-build primer to bring the surface level. Sand the primer progressively finer before the base coat. Heavy single coats sag and trap solvent.
 - **Test on scrap first.** That includes adhesion promoter on your filament, solvent compatibility of primer and paint with the printed part, and clear coat over a sample decal. Some solvent clears attack decals unless the first coats are light mists.
 - **Decal setting solutions** soften the decal film. Apply sparingly and let them work before touching the decal; check the manufacturer's instructions for order of use.
+- **Keep mating surfaces thin.** Avoid building up primer and paint on surfaces where parts join, such as bezel seats, lips and screw bosses. Excess film thickness makes parts fit poorly. Mask them, or keep coats there light.
 - **Allow full cure** before assembly and handling. Fasteners and heat-set inserts can mar paint that has not fully cured.
 
 ## Building
@@ -96,15 +114,19 @@ The keyboard firmware is built with QMK; see `firmware/keyboard/README.md`. The 
 
 | Part | Licence |
 |---|---|
-| Enclosure (STEP/STL), PCB design files, BOMs, documentation | [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) |
+| Enclosure (STEP/STL), PCB design files, BOMs, decals, documentation | [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) (`LICENSE`), with the additional permission below |
 | Keyboard firmware (QMK) and ADB firmware (TMK) | GPL-2.0-or-later, as inherited from QMK and TMK (`firmware/LICENSE`) |
 | Pi-side software (linked repositories) | MIT, except emu-control-strip (see that repository) |
 
-The hardware is shared for others to build and enjoy individually, not for commercial use. Because of the non-commercial term it is not "open source hardware" in the OSHWA sense. Contact the author about other uses.
+The hardware is shared for others to build, modify and enjoy, not for commercial use. ShareAlike means that if you publish a modified version, it must use the same licence, so improvements stay available to everyone. Because of the non-commercial term this is not "open source hardware" in the OSHWA sense.
 
-The full-size BookMac STLs and STEP model are also on Thingiverse: [thing:7426168](https://www.thingiverse.com/thing:7426168). The Mini is published here only.
+**Additional permission: making parts at cost.** In addition to CC BY-NC-SA 4.0, you may make and supply parts, boards or kits from this repository's hardware files **at cost**. "At cost" means the price covers only materials, fabrication, shipping and payment-processing fees: no profit and no charge for labour. Group buys on these terms are allowed. Selling for profit, charging for labour, or listing on marketplaces such as Etsy or eBay requires written permission from the maintainer (GitHub user spc6486); please open an issue to ask.
+
+Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for the terms that apply to them.
+
+The full-size BookMac is also on Thingiverse: [thing:7426168](https://www.thingiverse.com/thing:7426168). The Mini is published here only.
 
 ## Not included
 
 - Mac OS system software or Macintosh ROM images. Obtain these yourself.
-- Apple logos, the case label, or other Apple artwork or markings.
+- Apple logo artwork, the case label, or other Apple decal artwork. (Photos and renders show the finished replica with its markings; no logo artwork files are included.)
