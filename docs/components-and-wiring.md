@@ -117,7 +117,7 @@ Observed runtime on battery: about 3–6 h [S].
 ### 1.8 Enclosure and decals
 
 - **Full size:** `enclosure/bookmac/`, STEP model plus one STL per part; also on [Thingiverse thing 7426168](https://www.thingiverse.com/thing:7426168).
-- **Mini:** `enclosure/bookmac-mini/`, STEP model plus one STL per part.
+- **Mini:** `enclosure/bookmac-mini/`, STEP model plus one STL per part; also on [Thingiverse thing 7427053](https://www.thingiverse.com/thing:7427053).
 - See [`enclosure/README.md`](../enclosure/README.md) for parts and sizes, and [`decals/README.md`](../decals/README.md) for the keycap decals.
 
 ### 1.9 Custom PCBs
@@ -194,6 +194,8 @@ The Mini differs in the display-controller block (PCB800869, with the jack and O
 | 18 | GPIO24 | 1 kΩ → headphone detect (LOW = speaker off) |
 | 32 | GPIO12 | 1 kΩ → backlight DIM |
 | 1 | 3.3 V | **Pending:** → PiPower 5 HAT pin 1 (SDSIG shutdown sense; see [G]) |
+
+**Header connections:** the wires to the Pi's 40-pin header end in four push-on **JST XH 2-pin** housings (2.50 mm pitch, crimped contacts), not individual Dupont jumpers. XH contacts fit the header's 0.64 mm square pins, and the 0.04 mm pitch difference doesn't matter over two positions. Some housings carry only one wire; the 2-pin housing is used anyway because it grips the header more securely than a single jumper. A housing on a bare header is not keyed and can go on reversed or one pin off, so mark pin 1 on each housing and on the header position before unplugging [S]. See the layout photo at the top of this page.
 
 ### 3.2 Battery (2S) [G]
 

@@ -135,7 +135,7 @@ The hardware is shared for others to build, modify and enjoy, not for commercial
 
 Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for the terms that apply to them.
 
-The full-size BookMac is also on Thingiverse: [thing:7426168](https://www.thingiverse.com/thing:7426168). The Mini is published here only.
+Both enclosures are also on Thingiverse: full-size BookMac [thing:7426168](https://www.thingiverse.com/thing:7426168), BookMac Mini [thing:7427053](https://www.thingiverse.com/thing:7427053).
 
 ## Not included
 

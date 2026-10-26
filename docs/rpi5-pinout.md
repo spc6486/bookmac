@@ -15,6 +15,8 @@ The BookMac is powered by a SunFounder PiPower 5 UPS communicating over I2C. Six
 | 18 | GPIO24 | Out | Headphone jack detect pin | Via 1kΩ resistor to PJ-342B jack pin 6 (detect). Active-low: GPIO LOW pulls detect to ground (simulates plug insertion → speaker off), GPIO HIGH lets detect float to 0.8V (speaker on). Config: `gpio_active_high: false` |
 | 32 | GPIO12 | Out | Backlight DIM via 1kΩ | RP1 hardware PWM (PWM0_CHAN0), 25 kHz, sysfs at `/sys/class/pwm/pwmchip0/pwm0/`. Optional 4.7kΩ pull-down to GND holds backlight off at power-on |
 
+**Connectors:** the BookMac uses four push-on JST XH 2-pin housings (2.50 mm pitch) on the header pins rather than loose jumper wires, for a more secure connection. Some carry only one wire. The housings are not keyed on a bare header, so mark pin 1 on each one.
+
 ### Off-header connections
 
 | Interface | Location | Connection | Notes |
